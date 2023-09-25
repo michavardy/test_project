@@ -17,6 +17,6 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag ui:$(date +%s)
     - name: Log in to Docker Hub
-      run: docker login -u "michavardy" -p "DiamondInTheRough"
+      run: docker login -u "michav1" -p "DiamondInTheRough"
     - name: Push Docker image to Docker Hub
       run: docker push ui:$(date +%s)
