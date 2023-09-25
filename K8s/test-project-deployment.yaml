@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: test-project
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: test-project
+    strategy:
+        type: RollingUpdate
+    template:
+        metadata:
+            labels:
+                app: test-project
+        spec:
+            containers:
+            -   name: test-project
+                image: michav1/ui:0.1.0
+                -   containerPort: 80
+                env:
+                    - name: test
+                      value: "test"
+            imagePullSecrets:
+            - name: registry-credentials
+
