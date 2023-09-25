@@ -14,9 +14,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+
+    - name: Read version from VERSION file
+      id: read_version
+      run: echo "::set-output name=version::$(cat VERSION)"
+      
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ui:$(date +%s)
+      run: docker build . --file Dockerfile --tag michav1/ui:${{ steps.read_version.outputs.version }}
+    
     - name: Log in to Docker Hub
       run: docker login -u "michav1" -p "DiamondInTheRough"
+    
     - name: Push Docker image to Docker Hub
-      run: docker push ui:$(date +%s)
+      run: docker push michav1/ui:${{ steps.read_version.outputs.version }}
