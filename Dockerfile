@@ -22,5 +22,5 @@ COPY .env ./
 
 EXPOSE 80
 #CMD ["bin", "bash"]
-CMD ["uvicorn", "--host", "0.0.0.0", "--port", "80", "--workers", "4", "backend.main:start"]
+CMD ["uvicorn", "backend.main:start", "--proxy-headers", "--host", "0.0.0.0", "--port", "80"]
 
