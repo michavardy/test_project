@@ -9,19 +9,18 @@ COPY app/public/ ./public
 COPY .env ./
 RUN npm run build
 
-
 ##---STAGE 2---##
-FROM nginx:alpine
 
-# Remove the default Nginx configuration
-RUN rm -rf /usr/share/nginx/html/*
+# Install and build Python dependencies
+FROM tiangolo/uvicorn-gunicorn-fastapi:python3.9 as backend-build
+COPY .env ./
+COPY --from=frontend-build /app/frontend/build /app/frontend/build
+WORKDIR /app/backend
+COPY api/requirements.txt ./
+RUN pip install -r requirements.txt
+COPY api/ ./
 
-# Copy the build output from the previous stage into the Nginx directory
-COPY --from=frontend-build /app/frontend/build /usr/share/nginx/html
-
-# Expose port 80
 EXPOSE 80
-
-# Start Nginx when the container starts
-CMD ["nginx", "-g", "daemon off;"]
+#CMD ["bin", "bash"]
+CMD ["uvicorn", "--host", "0.0.0.0", "--port", "80", "--workers", "4", "backend.main:start"]
 
