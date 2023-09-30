@@ -4,7 +4,7 @@ from fastapi.staticfiles import StaticFiles  # Import StaticFiles
 
 import uvicorn
 
-app = FastAPI()
+app = FastAPI(openapi_prefix="/test")
 
 
 # Configure CORS settings
@@ -27,7 +27,7 @@ app.add_middleware(
 )
 
 
-@app.get("/test/hello_world")
+@app.get("/hello_world")
 def read_root():
     return {"Hello": "World"}
 
@@ -39,7 +39,7 @@ class SPAStaticFiles(StaticFiles):
         return response
 
 # Mount the static files directory (built React files) to the URL path "/"
-app.mount("/test", SPAStaticFiles(directory="/app/frontend/build", html=True), name="static")
+app.mount("/", SPAStaticFiles(directory="/app/frontend/build", html=True), name="static")
 
 
 def start():
