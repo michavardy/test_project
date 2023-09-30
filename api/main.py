@@ -1,10 +1,10 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware  # Import the CORSMiddleware
 from fastapi.staticfiles import StaticFiles  # Import StaticFiles
 
 import uvicorn
 
-app = FastAPI(openapi_prefix="/test")
+app = FastAPI(root_path="/test")
 
 
 # Configure CORS settings
@@ -28,8 +28,8 @@ app.add_middleware(
 
 
 @app.get("/hello_world")
-def read_root():
-    return {"Hello": "World"}
+def read_root(request: Request):
+    return {"Hello": "World", "root_path": request.scope.get("root_path")}
 
 class SPAStaticFiles(StaticFiles):
     async def get_response(self, path: str, scope):
