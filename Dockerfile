@@ -6,6 +6,7 @@ COPY app/package*.json ./
 RUN npm install
 COPY app/src/ ./src
 COPY app/public/ ./public
+COPY .env ./
 RUN npm run build
 
 
