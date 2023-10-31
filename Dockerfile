@@ -6,7 +6,7 @@ COPY app/package*.json ./
 RUN npm install
 COPY app/src/ ./src
 COPY app/public/ ./public
-COPY .env ./
+#COPY .env ./
 RUN npm run build
 
 ##---STAGE 2---##
@@ -18,7 +18,7 @@ WORKDIR /app/backend
 COPY api/requirements.txt ./
 RUN pip install -r requirements.txt
 COPY api/ ./
-COPY .env ./
+#COPY .env ./
 
 EXPOSE 80
 #CMD ["bin", "bash"]
