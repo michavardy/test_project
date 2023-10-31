@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: test-project
-        image: michav1/ui:0.1.7
+        image: michav1/ui:0.1.8
         ports:
         - containerPort: 80
 
@@ -62,20 +62,3 @@ spec:
             port:
               number: 80
 ---
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: test-project
-spec:
-  ingressClassName: nginx
-  rules:
-  - host: localhost
-    http:
-      paths:
-      - path: /test
-        pathType: Prefix
-        backend:
-          service:
-            name: tea-svc
-            port:
-              number: 80
