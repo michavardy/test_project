@@ -4,7 +4,7 @@ from fastapi.staticfiles import StaticFiles  # Import StaticFiles
 
 import uvicorn
 
-app = FastAPI(root_path="/test")
+app = FastAPI(root_path="/")
 
 
 # Configure CORS settings

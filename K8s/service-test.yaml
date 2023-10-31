@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: test-project
-        image: michav1/ui:0.1.9
+        image: michav1/ui:0.1.10
         ports:
         - containerPort: 80
 
