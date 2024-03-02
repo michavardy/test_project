@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
     - name: ui-app
-      image: michav1/ui:0.1.10
+      image: michav1/ui:0.1.11
 ---
 kind: Service
 apiVersion: v1
