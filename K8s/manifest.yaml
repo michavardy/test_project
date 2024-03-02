@@ -1,0 +1,38 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: ui-app
+  labels:
+    app: ui
+spec:
+  containers:
+    - name: ui-app
+      image: michav1/ui:0.1.10
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: ui-service
+spec:
+  selector:
+    app: ui
+  ports:
+    - port: 8080
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ui-ingress
+spec:
+  rules:
+    - http:
+        paths:
+          - pathType: Prefix
+            path: /ui
+            backend:
+              service:
+                name: ui-service
+                port:
+                  number: 8080
+---
+
