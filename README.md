@@ -91,7 +91,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: example-ingress
+  name: ui-ingress
 spec:
   rules:
     - http:
@@ -156,7 +156,7 @@ http {
     server {
         listen 3000;
         location /ui {
-            proxy_pass http://192.168.49.2:8080/ui;
+            proxy_pass http://192.168.49.2/ui/;
             proxy_set_header Host $host;
             proxy_set_header X-Real-IP $remote_addr;
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -169,7 +169,9 @@ http {
 ```
 
 2. reload nginx service
-`sudo systemctl reload nginx`
+```bash
+sudo systemctl reload nginx
+```
 
 3. test service: (in browser)
 `http://82.166.86.139:3000/ui`
