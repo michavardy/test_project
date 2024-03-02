@@ -6,6 +6,7 @@ COPY app/package*.json ./
 RUN npm install
 COPY app/src/ ./src
 COPY app/public/ ./public
+COPY .env ./
 #COPY .env ./
 RUN npm run build
 
@@ -13,6 +14,7 @@ RUN npm run build
 
 # Install and build Python dependencies
 FROM tiangolo/uvicorn-gunicorn-fastapi:python3.9 as backend-build
+COPY .env ./
 COPY --from=frontend-build /app/frontend/build /app/frontend/build
 WORKDIR /app/backend
 COPY api/requirements.txt ./
