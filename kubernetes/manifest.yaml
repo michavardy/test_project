@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: ui-app-deployment
 spec:
-  replicas: 1  # Start with 2 replicas; adjust as necessary
+  replicas: 1  
   selector:
     matchLabels:
       app: ui
@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: ui-app
-        image: michav1/ui:0.1.12
+        image: michav1/ui:0.1.13
         ports:
         - containerPort: 80
 ---
